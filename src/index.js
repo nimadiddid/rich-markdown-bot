@@ -44,7 +44,7 @@ function mainKeyboard(lang) {
         { text: "🎨 دمو کامل", callback_data: "fa_demo" },
       ],
       [
-        { text: "🇬🇧 Switch to English", callback_data: "en_start" },
+        { text: "Switch to English", callback_data: "en_start" },
       ],
     ],
   };
@@ -61,7 +61,7 @@ function mainKeyboard(lang) {
         { text: "🎨 Full Demo", callback_data: "en_demo" },
       ],
       [
-        { text: "🇮🇷 تغییر به فارسی", callback_data: "fa_start" },
+        { text: "تغییر به پارسی", callback_data: "fa_start" },
       ],
     ],
   };
@@ -75,8 +75,8 @@ function backKeyboard(lang) {
           ? { text: "⬅️ بازگشت به منو", callback_data: "fa_back" }
           : { text: "⬅️ Back to Menu", callback_data: "en_back" },
         lang === "fa"
-          ? { text: "🇬🇧 English", callback_data: "en_start" }
-          : { text: "🇮🇷 فارسی", callback_data: "fa_start" },
+          ? { text: "English", callback_data: "en_start" }
+          : { text: "پارسی", callback_data: "fa_start" },
       ],
     ],
   };
@@ -196,8 +196,8 @@ async function handleCallback(cb, api) {
 const LANG_SELECT_MESSAGE = "Please choose your language / زبان خود را انتخاب کنید:";
 const LANG_SELECT_KEYBOARD = {
   inline_keyboard: [[
-    { text: "🇮🇷 فارسی", callback_data: "fa_start" },
-    { text: "🇬🇧 English", callback_data: "en_start" },
+    { text: "پارسی", callback_data: "fa_start" },
+    { text: "English", callback_data: "en_start" },
   ]],
 };
 
@@ -260,10 +260,17 @@ const HELP_MD = {
   fa: `# 📖 راهنمای Markdown
 
 متن Markdown بفرستید، رندر شده برمیگرده.
+کادر خاکستری = چیزی که تایپ میکنید ↓ نتیجه بعدشه.
+
+[Rich Markdown Telegram](https://core.telegram.org/bots/api#rich-message-formatting-options)
 
 ---
 
 ## Text Styles
+
+\`\`\`
+**bold**  *italic*  ~~strike~~  \`code\`  ==marked==  ||spoiler||
+\`\`\`
 
 **bold** *italic* ~~strike~~ \`code\` ==marked== ||spoiler||
 
@@ -271,13 +278,35 @@ const HELP_MD = {
 
 ## Headings
 
+\`\`\`
 # Heading 1
 ## Heading 2
 ### Heading 3
+#### Heading 4
+##### Heading 5
+###### Heading 6
+\`\`\`
+
+# Heading 1
+## Heading 2
+### Heading 3
+#### Heading 4
+##### Heading 5
+###### Heading 6
 
 ---
 
 ## Lists
+
+\`\`\`
+- milk
+- eggs
+- [ ] todo
+- [x] done
+
+1. wake up
+2. ship it
+\`\`\`
 
 - milk
 - eggs
@@ -291,13 +320,67 @@ const HELP_MD = {
 
 ## Links & Quotes
 
+\`\`\`
+[Telegram](https://telegram.org)
+
+>To be, or not to be.
+\`\`\`
+
 [Telegram](https://telegram.org)
 
 >To be, or not to be.
 
 ---
 
+## Block Quote (چند خط)
+
+\`\`\`
+>Block quotation started
+>
+>Block quotation continued on the next line
+>Block quotation continued on the same line
+
+>The last line of the block quotation
+\`\`\`
+
+>Block quotation started
+>
+>Block quotation continued on the next line
+>Block quotation continued on the same line
+
+>The last line of the block quotation
+
+---
+
+## Unordered List (علامت‌های مختلف)
+
+\`\`\`
+- unordered list item
+* unordered list item
++ unordered list item
+\`\`\`
+
+- unordered list item
+* unordered list item
++ unordered list item
+
+---
+
+## Divider
+
+\`\`\`
+---
+\`\`\`
+
+---
+
 ## Code Blocks
+
+\`\`\`\`
+\`\`\`python
+print("hello")
+\`\`\`
+\`\`\`\`
 
 \`\`\`python
 print("hello")
@@ -306,6 +389,13 @@ print("hello")
 ---
 
 ## Tables
+
+\`\`\`\`
+| Lang | Speed |
+|:-----|------:|
+| Rust | fast  |
+| Py   | comfy |
+\`\`\`\`
 
 | Lang | Speed |
 |:-----|------:|
@@ -316,6 +406,11 @@ print("hello")
 
 ## Math
 
+\`\`\`\`
+Inline $E = mc^2$ and a block:
+$$\\sum_{i=1}^{n} i = \\frac{n(n+1)}{2}$$
+\`\`\`\`
+
 Inline $E = mc^2$ and a block:
 
 $$\\sum_{i=1}^{n} i = \\frac{n(n+1)}{2}$$
@@ -323,6 +418,12 @@ $$\\sum_{i=1}^{n} i = \\frac{n(n+1)}{2}$$
 ---
 
 ## Details
+
+\`\`\`\`
+<details><summary>**کلیک کن**</summary>
+محتوای مخفی!
+</details>
+\`\`\`\`
 
 <details><summary>**کلیک کن**</summary>
 محتوای مخفی!
@@ -335,10 +436,17 @@ $$\\sum_{i=1}^{n} i = \\frac{n(n+1)}{2}$$
   en: `# 📖 Markdown Guide
 
 Send Markdown text and get it echoed back rendered.
+Grey box = what you type ↓ result comes right after.
+
+[Rich Markdown Telegram](https://core.telegram.org/bots/api#rich-message-formatting-options)
 
 ---
 
 ## Text Styles
+
+\`\`\`
+**bold**  *italic*  ~~strike~~  \`code\`  ==marked==  ||spoiler||
+\`\`\`
 
 **bold** *italic* ~~strike~~ \`code\` ==marked== ||spoiler||
 
@@ -346,13 +454,35 @@ Send Markdown text and get it echoed back rendered.
 
 ## Headings
 
+\`\`\`
 # Heading 1
 ## Heading 2
 ### Heading 3
+#### Heading 4
+##### Heading 5
+###### Heading 6
+\`\`\`
+
+# Heading 1
+## Heading 2
+### Heading 3
+#### Heading 4
+##### Heading 5
+###### Heading 6
 
 ---
 
 ## Lists
+
+\`\`\`
+- milk
+- eggs
+- [ ] todo
+- [x] done
+
+1. wake up
+2. ship it
+\`\`\`
 
 - milk
 - eggs
@@ -364,7 +494,27 @@ Send Markdown text and get it echoed back rendered.
 
 ---
 
+## Unordered List (all markers)
+
+\`\`\`
+- unordered list item
+* unordered list item
++ unordered list item
+\`\`\`
+
+- unordered list item
+* unordered list item
++ unordered list item
+
+---
+
 ## Links & Quotes
+
+\`\`\`
+[Telegram](https://telegram.org)
+
+>To be, or not to be.
+\`\`\`
 
 [Telegram](https://telegram.org)
 
@@ -372,7 +522,41 @@ Send Markdown text and get it echoed back rendered.
 
 ---
 
+## Block Quote (multi-line)
+
+\`\`\`
+>Block quotation started
+>
+>Block quotation continued on the next line
+>Block quotation continued on the same line
+
+>The last line of the block quotation
+\`\`\`
+
+>Block quotation started
+>
+>Block quotation continued on the next line
+>Block quotation continued on the same line
+
+>The last line of the block quotation
+
+---
+
+## Divider
+
+\`\`\`
+---
+\`\`\`
+
+---
+
 ## Code Blocks
+
+\`\`\`\`
+\`\`\`python
+print("hello")
+\`\`\`
+\`\`\`\`
 
 \`\`\`python
 print("hello")
@@ -381,6 +565,13 @@ print("hello")
 ---
 
 ## Tables
+
+\`\`\`
+| Lang | Speed |
+|:-----|------:|
+| Rust | fast  |
+| Py   | comfy |
+\`\`\`
 
 | Lang | Speed |
 |:-----|------:|
@@ -391,6 +582,11 @@ print("hello")
 
 ## Math
 
+\`\`\`
+Inline $E = mc^2$ and a block:
+$$\\sum_{i=1}^{n} i = \\frac{n(n+1)}{2}$$
+\`\`\`
+
 Inline $E = mc^2$ and a block:
 
 $$\\sum_{i=1}^{n} i = \\frac{n(n+1)}{2}$$
@@ -398,6 +594,12 @@ $$\\sum_{i=1}^{n} i = \\frac{n(n+1)}{2}$$
 ---
 
 ## Details (Collapsible)
+
+\`\`\`
+<details><summary>**Click me**</summary>
+Hidden content!
+</details>
+\`\`\`
 
 <details><summary>**Click me**</summary>
 Hidden content!
@@ -413,9 +615,18 @@ const HELP_HTML = {
 
 اگه پیامت با \`<\` شروع بشه، بات به عنوان HTML رندر میکنه.
 
+[Rich Markdown Telegram](https://core.telegram.org/bots/api#rich-message-formatting-options)
+
 ---
 
 ## Text Styles
+
+\`\`\`
+<b>bold</b> <i>italic</i> <u>underline</u>
+<s>strike</s> <code>code</code> <mark>marked</mark>
+<tg-spoiler>spoiler</tg-spoiler>
+<sup>superscript</sup> <sub>subscript</sub>
+\`\`\`
 
 <b>bold</b> <i>italic</i> <u>underline</u> <s>strike</s> <code>code</code> <mark>marked</mark> <tg-spoiler>spoiler</tg-spoiler> <sup>sup</sup> <sub>sub</sub>
 
@@ -423,27 +634,85 @@ const HELP_HTML = {
 
 ## Headings
 
+\`\`\`
 <h1>Heading 1</h1>
 <h2>Heading 2</h2>
 <h3>Heading 3</h3>
+<h4>Heading 4</h4>
+<h5>Heading 3</h5>
+\`\`\`
+
+<h1>Heading 1</h1>
+<h2>Heading 2</h2>
+<h3>Heading 3</h3>
+<h4>Heading 4</h4>
+<h5>Heading 3</h5>
 
 ---
 
 ## Lists
 
+\`\`\`
 <ul><li>milk</li><li>eggs</li></ul>
 <ol><li>wake up</li><li>ship it</li></ol>
+<ul>
+  <li><input type="checkbox" checked>done</li>
+  <li><input type="checkbox">todo</li>
+</ul>
+\`\`\`
+
+<ul><li>milk</li><li>eggs</li></ul>
+<ol><li>wake up</li><li>ship it</li></ol>
+<ul><li><input type="checkbox" checked>done</li><li><input type="checkbox">todo</li></ul>
 
 ---
 
 ## Links & Quotes
 
+\`\`\`
 <a href="https://telegram.org">Telegram</a>
 <blockquote>متن نقل‌قول<cite>نویسنده</cite></blockquote>
+<aside>Pull quote<cite>The Author</cite></aside>
+\`\`\`
+
+<a href="https://telegram.org">Telegram</a>
+<blockquote>متن نقل‌قول<cite>نویسنده</cite></blockquote>
+<aside>Pull quote<cite>The Author</cite></aside>
+
+---
+
+## Superscript & Subscript
+
+\`\`\`
+<sub>subscript text</sub>
+<sup>superscript text</sup>
+\`\`\`
+
+متن نرمال با <sub>subscript text</sub> و <sup>superscript text</sup>
+
+---
+
+## Footnotes
+
+\`\`\`
+Text with a reference[^id1] and another one[^id2].
+
+[^id1]: Definition of the first footnote.
+[^id2]: Definition of the second footnote.
+\`\`\`
+
+Text with a reference[^id1] and another one[^id2].
+
+[^id1]: Definition of the first footnote.
+[^id2]: Definition of the second footnote.
 
 ---
 
 ## Code
+
+\`\`\`
+<pre><code class="language-python">print("hello")</code></pre>
+\`\`\`
 
 <pre><code class="language-python">print("hello")</code></pre>
 
@@ -451,11 +720,24 @@ const HELP_HTML = {
 
 ## Table
 
+\`\`\`
+<table>
+  <tr><th>Lang</th><th>Speed</th></tr>
+  <tr><td>Rust</td><td>fast</td></tr>
+  <tr><td>Py</td><td>comfy</td></tr>
+</table>
+\`\`\`
+
 <table><tr><th>Lang</th><th>Speed</th></tr><tr><td>Rust</td><td>fast</td></tr><tr><td>Py</td><td>comfy</td></tr></table>
 
 ---
 
 ## Math
+
+\`\`\`
+<tg-math>x^2 + y^2</tg-math>
+<tg-math-block>E = mc^2</tg-math-block>
+\`\`\`
 
 <tg-math>x^2 + y^2</tg-math>
 
@@ -464,6 +746,10 @@ const HELP_HTML = {
 ---
 
 ## Details
+
+\`\`\`
+<details open><summary>عنوان</summary>محتوا</details>
+\`\`\`
 
 <details open><summary>عنوان</summary>محتوا</details>
 
@@ -475,9 +761,18 @@ const HELP_HTML = {
 
 If your message starts with \`<\`, the bot renders it as HTML.
 
+[Rich Markdown Telegram](https://core.telegram.org/bots/api#rich-message-formatting-options)
+
 ---
 
 ## Text Styles
+
+\`\`\`
+<b>bold</b> <i>italic</i> <u>underline</u>
+<s>strike</s> <code>code</code> <mark>marked</mark>
+<tg-spoiler>spoiler</tg-spoiler>
+<sup>superscript</sup> <sub>subscript</sub>
+\`\`\`
 
 <b>bold</b> <i>italic</i> <u>underline</u> <s>strike</s> <code>code</code> <mark>marked</mark> <tg-spoiler>spoiler</tg-spoiler> <sup>sup</sup> <sub>sub</sub>
 
@@ -485,27 +780,85 @@ If your message starts with \`<\`, the bot renders it as HTML.
 
 ## Headings
 
+\`\`\`
 <h1>Heading 1</h1>
 <h2>Heading 2</h2>
 <h3>Heading 3</h3>
+<h4>Heading 4</h4>
+<h5>Heading 3</h5>
+\`\`\`
+
+<h1>Heading 1</h1>
+<h2>Heading 2</h2>
+<h3>Heading 3</h3>
+<h4>Heading 4</h4>
+<h5>Heading 3</h5>
 
 ---
 
 ## Lists
 
+\`\`\`
 <ul><li>milk</li><li>eggs</li></ul>
 <ol><li>wake up</li><li>ship it</li></ol>
+<ul>
+  <li><input type="checkbox" checked>done</li>
+  <li><input type="checkbox">todo</li>
+</ul>
+\`\`\`
+
+<ul><li>milk</li><li>eggs</li></ul>
+<ol><li>wake up</li><li>ship it</li></ol>
+<ul><li><input type="checkbox" checked>done</li><li><input type="checkbox">todo</li></ul>
 
 ---
 
 ## Links & Quotes
 
+\`\`\`
 <a href="https://telegram.org">Telegram</a>
 <blockquote>Quote text<cite>Author</cite></blockquote>
+<aside>Pull quote<cite>The Author</cite></aside>
+\`\`\`
+
+<a href="https://telegram.org">Telegram</a>
+<blockquote>Quote text<cite>Author</cite></blockquote>
+<aside>Pull quote<cite>The Author</cite></aside>
+
+---
+
+## Superscript & Subscript
+
+\`\`\`
+<sub>subscript text</sub>
+<sup>superscript text</sup>
+\`\`\`
+
+Normal text with <sub>subscript text</sub> and <sup>superscript text</sup>
+
+---
+
+## Footnotes
+
+\`\`\`
+Text with a reference[^id1] and another one[^id2].
+
+[^id1]: Definition of the first footnote.
+[^id2]: Definition of the second footnote.
+\`\`\`
+
+Text with a reference[^id1] and another one[^id2].
+
+[^id1]: Definition of the first footnote.
+[^id2]: Definition of the second footnote.
 
 ---
 
 ## Code
+
+\`\`\`
+<pre><code class="language-python">print("hello")</code></pre>
+\`\`\`
 
 <pre><code class="language-python">print("hello")</code></pre>
 
@@ -513,11 +866,24 @@ If your message starts with \`<\`, the bot renders it as HTML.
 
 ## Table
 
+\`\`\`
+<table>
+  <tr><th>Lang</th><th>Speed</th></tr>
+  <tr><td>Rust</td><td>fast</td></tr>
+  <tr><td>Py</td><td>comfy</td></tr>
+</table>
+\`\`\`
+
 <table><tr><th>Lang</th><th>Speed</th></tr><tr><td>Rust</td><td>fast</td></tr><tr><td>Py</td><td>comfy</td></tr></table>
 
 ---
 
 ## Math
+
+\`\`\`
+<tg-math>x^2 + y^2</tg-math>
+<tg-math-block>E = mc^2</tg-math-block>
+\`\`\`
 
 <tg-math>x^2 + y^2</tg-math>
 
@@ -526,6 +892,10 @@ If your message starts with \`<\`, the bot renders it as HTML.
 ---
 
 ## Details (Collapsible)
+
+\`\`\`
+<details open><summary>Title</summary>Content here</details>
+\`\`\`
 
 <details open><summary>Title</summary>Content here</details>
 
@@ -538,10 +908,27 @@ const HELP_MEDIA = {
   fa: `# 🖼 راهنمای مدیا
 
 برای ارسال مدیا در Rich Message از سینتکس تصویر Markdown استفاده کنید.
+URL پسوند فایل تعیین می‌کنه چه نوع مدیایی نمایش داده بشه.
+
+[Rich Markdown Telegram](https://core.telegram.org/bots/api#rich-message-formatting-options)
+
+---
+
+## نقشه
+
+\`\`\`
+<tg-map lat="41.9" long="12.5" zoom="14"/>
+\`\`\`
+
+<tg-map lat="41.9" long="12.5" zoom="14"/>
 
 ---
 
 ## عکس
+
+\`\`\`
+![](https://telegram.org/example/photo.jpg)
+\`\`\`
 
 ![](https://telegram.org/example/photo.jpg)
 
@@ -549,19 +936,77 @@ const HELP_MEDIA = {
 
 ## ویدیو
 
+\`\`\`
+![](https://telegram.org/example/video.mp4)
+\`\`\`
+
 ![](https://telegram.org/example/video.mp4)
 
 ---
 
 ## فایل صوتی
 
+\`\`\`
 ![](https://telegram.org/example/audio.mp3)
+\`\`\`
+
+![](https://telegram.org/example/audio.mp3)
+
+---
+
+## ویس نوت (ogg)
+
+\`\`\`
+![](https://telegram.org/example/audio.ogg)
+\`\`\`
+
+![](https://telegram.org/example/audio.ogg)
 
 ---
 
 ## انیمیشن (gif)
 
+\`\`\`
 ![](https://telegram.org/example/animation.gif)
+\`\`\`
+
+![](https://telegram.org/example/animation.gif)
+
+---
+
+## مدیا با کپشن
+
+\`\`\`
+![](https://telegram.org/example/photo.jpg "Photo caption")
+![](https://telegram.org/example/video.mp4 "Video caption")
+![](https://telegram.org/example/audio.mp3 "Audio caption")
+![](https://telegram.org/example/audio.ogg "Voice note caption")
+![](https://telegram.org/example/animation.gif "Animation caption")
+\`\`\`
+
+![](https://telegram.org/example/photo.jpg "Photo caption")
+![](https://telegram.org/example/video.mp4 "Video caption")
+![](https://telegram.org/example/audio.mp3 "Audio caption")
+![](https://telegram.org/example/audio.ogg "Voice note caption")
+![](https://telegram.org/example/animation.gif "Animation caption")
+
+---
+
+## اسلایدشو (ترکیبی)
+
+\`\`\`
+<tg-slideshow>
+<img src="https://telegram.org/example/photo.jpg"/>
+<img src="https://telegram.org/example/animation.gif"/>
+<video src="https://telegram.org/example/video.mp4"/><figcaption>Slideshow caption<cite>The Author</cite></figcaption>
+</tg-slideshow>
+\`\`\`
+
+<tg-slideshow>
+<img src="https://telegram.org/example/photo.jpg"/>
+<img src="https://telegram.org/example/animation.gif"/>
+<video src="https://telegram.org/example/video.mp4"/><figcaption>Slideshow caption<cite>The Author</cite></figcaption>
+</tg-slideshow>
 
 ---
 
@@ -570,10 +1015,27 @@ const HELP_MEDIA = {
   en: `# 🖼 Media Guide
 
 Use Markdown image syntax to embed media in Rich Messages.
+The URL file extension determines the media type rendered.
+
+[Rich Markdown Telegram](https://core.telegram.org/bots/api#rich-message-formatting-options)
+
+---
+
+## Map
+
+\`\`\`
+<tg-map lat="41.9" long="12.5" zoom="14"/>
+\`\`\`
+
+<tg-map lat="41.9" long="12.5" zoom="14"/>
 
 ---
 
 ## Photo
+
+\`\`\`
+![](https://telegram.org/example/photo.jpg)
+\`\`\`
 
 ![](https://telegram.org/example/photo.jpg)
 
@@ -581,19 +1043,77 @@ Use Markdown image syntax to embed media in Rich Messages.
 
 ## Video
 
+\`\`\`
+![](https://telegram.org/example/video.mp4)
+\`\`\`
+
 ![](https://telegram.org/example/video.mp4)
 
 ---
 
 ## Audio
 
+\`\`\`
 ![](https://telegram.org/example/audio.mp3)
+\`\`\`
+
+![](https://telegram.org/example/audio.mp3)
+
+---
+
+## Voice Note (ogg)
+
+\`\`\`
+![](https://telegram.org/example/audio.ogg)
+\`\`\`
+
+![](https://telegram.org/example/audio.ogg)
 
 ---
 
 ## Animation (gif)
 
+\`\`\`
 ![](https://telegram.org/example/animation.gif)
+\`\`\`
+
+![](https://telegram.org/example/animation.gif)
+
+---
+
+## Media with Captions
+
+\`\`\`
+![](https://telegram.org/example/photo.jpg "Photo caption")
+![](https://telegram.org/example/video.mp4 "Video caption")
+![](https://telegram.org/example/audio.mp3 "Audio caption")
+![](https://telegram.org/example/audio.ogg "Voice note caption")
+![](https://telegram.org/example/animation.gif "Animation caption")
+\`\`\`
+
+![](https://telegram.org/example/photo.jpg "Photo caption")
+![](https://telegram.org/example/video.mp4 "Video caption")
+![](https://telegram.org/example/audio.mp3 "Audio caption")
+![](https://telegram.org/example/audio.ogg "Voice note caption")
+![](https://telegram.org/example/animation.gif "Animation caption")
+
+---
+
+## Slideshow (Combined)
+
+\`\`\`
+<tg-slideshow>
+<img src="https://telegram.org/example/photo.jpg"/>
+<img src="https://telegram.org/example/animation.gif"/>
+<video src="https://telegram.org/example/video.mp4"/><figcaption>Slideshow caption<cite>The Author</cite></figcaption>
+</tg-slideshow>
+\`\`\`
+
+<tg-slideshow>
+<img src="https://telegram.org/example/photo.jpg"/>
+<img src="https://telegram.org/example/animation.gif"/>
+<video src="https://telegram.org/example/video.mp4"/><figcaption>Slideshow caption<cite>The Author</cite></figcaption>
+</tg-slideshow>
 
 ---
 
@@ -605,11 +1125,46 @@ const DEMO = {
 
 این پیام نمونه خروجی واقعی همه قابلیت‌هاست.
 
+[Rich Markdown Telegram](https://core.telegram.org/bots/api#rich-message-formatting-options)
+
 ---
 
 ## Text Styles
 
 **bold** *italic* ~~strike~~ \`code\` ==marked== ||spoiler||
+<u>underline</u> <sup>super</sup> <sub>sub</sub>
+
+---
+
+## Nested Formatting
+
+**Bold _italic <u>underlined italic bold</u> italic_ bold**
+
+>نقل‌قول با **bold**، ~~strikethrough~~، و ||spoiler||، و [لینک](https://t.me/).
+
+---
+
+## Lists
+
+- آیتم با \`inline code\` و **bold**
+- آیتم با ~~strikethrough~~ و ==highlight==
+- [ ] کار انجام نشده
+- [x] کار انجام شده
+
+1. اول
+2. دوم
+3. سوم
+
+---
+
+## Code Block
+
+\`\`\`python
+def greet(name: str) -> str:
+    return f"سلام، {name}!"
+
+print(greet("تلگرام"))
+\`\`\`
 
 ---
 
@@ -623,28 +1178,88 @@ const DEMO = {
 
 ---
 
-## Code Block
+## Math
 
-\`\`\`python
-def greet(name: str) -> str:
-    return f"سلام، {name}!"
-\`\`\`
+Inline: $E = mc^2$ و $x^2 + y^2 = r^2$
+
+$$\\int_0^\\infty e^{-x^2} dx = \\frac{\\sqrt{\\pi}}{2}$$
 
 ---
 
-## Math
+## Details
 
-$$\\int_0^\\infty e^{-x^2} dx = \\frac{\\sqrt{\\pi}}{2}$$`,
+<details open><summary>**جزئیات بیشتر — کلیک کن**</summary>
+
+### داخل Details
+
+- **Markdown** داخل details کار میکنه
+- جدول، کد، لیست همه سازگارن
+
+| Key | Value |
+|:----|------:|
+| A   | 1     |
+| B   | 2     |
+
+\`\`\`js
+console.log("inside details!");
+\`\`\`
+
+</details>
+
+---
+
+## Media — اسلایدشو ترکیبی
+
+<tg-slideshow>
+<img src="https://telegram.org/example/photo.jpg"/>
+<img src="https://telegram.org/example/animation.gif"/>
+<video src="https://telegram.org/example/video.mp4"/><figcaption>Slideshow caption<cite>The Author</cite></figcaption>
+</tg-slideshow>`,
 
   en: `# 🎨 Full Demo — Live Output Sample
 
 This message demonstrates every supported feature rendered live.
+
+[Rich Markdown Telegram](https://core.telegram.org/bots/api#rich-message-formatting-options)
 
 ---
 
 ## Text Styles
 
 **bold** *italic* ~~strike~~ \`code\` ==marked== ||spoiler||
+<u>underline</u> <sup>super</sup> <sub>sub</sub>
+
+---
+
+## Nested Formatting
+
+**Bold _italic <u>underlined italic bold</u> italic_ bold**
+
+>Quote with **bold**, ~~strikethrough~~, and ||spoiler||, plus [a link](https://t.me/).
+
+---
+
+## Lists
+
+- Item with \`inline code\` and **bold**
+- Item with ~~strikethrough~~ and ==highlight==
+- [ ] Task todo
+- [x] Task done
+
+1. First
+2. Second
+3. Third
+
+---
+
+## Code Block
+
+\`\`\`python
+def greet(name: str) -> str:
+    return f"Hello, {name}!"
+
+print(greet("Telegram"))
+\`\`\`
 
 ---
 
@@ -658,16 +1273,41 @@ This message demonstrates every supported feature rendered live.
 
 ---
 
-## Code Block
+## Math
 
-\`\`\`python
-def greet(name: str) -> str:
-    return f"Hello, {name}!"
-\`\`\`
+Inline: $E = mc^2$ and $x^2 + y^2 = r^2$
+
+$$\\int_0^\\infty e^{-x^2} dx = \\frac{\\sqrt{\\pi}}{2}$$
 
 ---
 
-## Math
+## Details (Collapsible)
 
-$$\\int_0^\\infty e^{-x^2} dx = \\frac{\\sqrt{\\pi}}{2}$$`,
+<details open><summary>**More details — click me**</summary>
+
+### Inside Details
+
+- **Markdown** works inside details
+- Tables, code, lists all supported
+
+| Key | Value |
+|:----|------:|
+| A   | 1     |
+| B   | 2     |
+
+\`\`\`js
+console.log("inside details!");
+\`\`\`
+
+</details>
+
+---
+
+## Media — Combined Slideshow
+
+<tg-slideshow>
+<img src="https://telegram.org/example/photo.jpg"/>
+<img src="https://telegram.org/example/animation.gif"/>
+<video src="https://telegram.org/example/video.mp4"/><figcaption>Slideshow caption<cite>The Author</cite></figcaption>
+</tg-slideshow>`,
 };
