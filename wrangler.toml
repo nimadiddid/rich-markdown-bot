@@ -1,0 +1,5 @@
+name = "rich-markdown-bot"
+main = "src/index.js"
+compatibility_date = "2026-07-19"
+
+[vars]
